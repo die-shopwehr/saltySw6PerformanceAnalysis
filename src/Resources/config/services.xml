@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="salty\Sw6PerformanceAnalysis\Controller\PerformanceAnalysis" public="true">
+            <argument type="tagged_iterator" tag="salty_performance_analysis.server-config.analyzer"/>
+            <argument type="tagged_iterator" tag="salty_performance_analysis.shopware-config.analyzer"/>
+                    </service>
+
+        <!-- Handler -->
+        <!-- TODO: add handler priority -->
+        <!-- TODO: add different tags for server and shopware -->
+        <service id="salty\Sw6PerformanceAnalysis\Analyzer\Server\Cache">
+            <tag name="salty_performance_analysis.server-config.analyzer"/>
+        </service>
+
+        <service id="salty\Sw6PerformanceAnalysis\Analyzer\Server\Php">
+            <tag name="salty_performance_analysis.server-config.analyzer"/>
+        </service>
+
+        <service id="salty\Sw6PerformanceAnalysis\Analyzer\Server\Protocol">
+            <tag name="salty_performance_analysis.server-config.analyzer"/>
+        </service>
+
+        <service id="salty\Sw6PerformanceAnalysis\Analyzer\Shopware\Plugin">
+            <tag name="salty_performance_analysis.shopware-config.analyzer"/>
+        </service>
+
+    </services>
+</container>

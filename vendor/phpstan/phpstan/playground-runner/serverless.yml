@@ -1,0 +1,19 @@
+service: phpstan-runner
+
+provider:
+    name: aws
+    region: eu-west-1
+    runtime: provided
+    stage: prod
+    versionFunctions: false
+
+plugins:
+    - ./vendor/bref/bref
+
+functions:
+    main:
+        handler: bref.php
+        description: ''
+        timeout: 20
+        layers:
+            - arn:aws:lambda:eu-west-1:209497400698:layer:php-74:5
