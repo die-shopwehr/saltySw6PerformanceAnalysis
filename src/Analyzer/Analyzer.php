@@ -9,9 +9,9 @@ use salty\Sw6PerformanceAnalysis\Struct\ResultCollection;
 
 abstract class Analyzer
 {
-    public const STATUS_PASSED              = 'passed';
+    public const STATUS_PASSED              = 'success';
     public const STATUS_PASSED_WITH_WARNING = 'warning';
-    public const STATUS_FAILED              = 'failed';
+    public const STATUS_FAILED              = 'error';
     public const STATUS_INFO                = 'info';
 
     abstract public function analyze(ResultCollection $collection): ResultCollection;
@@ -36,6 +36,10 @@ abstract class Analyzer
         if ($operator === 'v+') {
             $value  = (string) $value;
             $status = $this->versionIsGreaterThan($value, $requirements[$name]);
+        }
+
+        if (array_key_exists('invalidValues', $requirements[$name]) && in_array($value, $requirements[$name]['invalidValues'], false)) {
+            $status = self::STATUS_FAILED;
         }
 
         $data = [
@@ -69,7 +73,7 @@ abstract class Analyzer
             return self::STATUS_PASSED;
         }
 
-        if (version_compare($value, $requirements['suggestedValue'], '<')) {
+        if (version_compare($value, $requirements['minValue'], '<')) {
             return self::STATUS_FAILED;
         }
 

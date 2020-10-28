@@ -1,1 +1,34 @@
-{}
+{
+    "saltyPerformanceAnalysis": {
+        "title": "Performance analysis",
+        "info": "Info",
+        "columns": {
+            "status": "Status",
+            "name": "Name",
+            "recommended": "Recommended",
+            "value": "Value",
+            "information": "Information"
+        },
+        "name": {
+            "phpVersion": "PHP Version",
+            "serverProtocol": "HTTP protocol version*<br/>*Due to technical limitations the server protocol version cannot be determined accurately",
+            "phpMemoryLimit": "PHP memory limit in Mb",
+            "phpMaxExecutionTime": "PHP - max execution time",
+            "apcu": "APCu object cache",
+            "apcuMemory": "APCu - available Memory",
+            "opcache": "Zend OpCache",
+            "opcacheMemory": "OpCache - available Memory"
+
+        },
+        "information": {
+            "phpVersion": "https://www.php.net/supported-versions.php",
+            "serverProtocol": "https://en.wikipedia.org/wiki/HTTP/2",
+            "phpMemoryLimit": "https://www.php.net/manual/en/ini.core.php#ini.memory-limit",
+            "phpMaxExecutionTime": "https://www.php.net/manual/en/info.configuration.php#ini.max-execution-time",
+            "apcu": "https://developers.shopware.com/sysadmins-guide/shopware-5-performance-for-sysadmins/#user-data-cache-apcu",
+            "apcuMemory": "https://www.php.net/manual/en/apcu.configuration.php",
+            "opcache": "https://developers.shopware.com/sysadmins-guide/shopware-5-performance-for-sysadmins/#opcode-cache",
+            "opcacheMemory": "https://www.php.net/manual/en/opcache.configuration.php"
+        }
+    }
+}

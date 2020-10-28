@@ -10,7 +10,7 @@ use salty\Sw6PerformanceAnalysis\Struct\ResultCollection;
 class Protocol extends Analyzer
 {
     private const REQUIREMENTS = [
-        'http_version' => [
+        'serverProtocol' => [
             'minValue'       => '2',
             'suggestedValue' => '2',
         ],
@@ -26,7 +26,7 @@ class Protocol extends Analyzer
     private function checkProtocolVersion(ResultCollection $collection): void
     {
         $protocolVersion = $this->getProtocolVersion();
-        $this->getResult($collection, 'http_version', $protocolVersion, self::REQUIREMENTS, 'v+');
+        $this->getResult($collection, 'serverProtocol', $protocolVersion, self::REQUIREMENTS, 'v+');
     }
 
     private function getProtocolVersion(): string

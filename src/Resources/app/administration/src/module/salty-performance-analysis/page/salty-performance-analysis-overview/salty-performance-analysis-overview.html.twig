@@ -1,25 +1,16 @@
 <sw-page>
-    {# TODO: Add snippets in js #}
-    {# TODO: Add snippets in twig #}
-    {# TODO: add reload functionality #}
     <template slot="content">
         <sw-card-view>
-            <sw-card title="Shopware Configuration" :large="true">
-                {{ shopwareConfigurationInformation }}
-
+            <sw-card title="Shopware Configuration" :large="true" class="test">
+                <salty-performance-analysis-grid
+                    :values="shopwareConfigurationInformation">
+                </salty-performance-analysis-grid>
             </sw-card>
 
             <sw-card title="Server Configuration" :large="true">
-                {# TODO: Add component #}
-
-                <sw-data-grid
-                    :dataSource="serverConfigurationInformation"
-                    :isLoading="isLoading"
-                    :columns="gridColumns"
-                    :showSettings="false"
-                    :showSelection="false"
-                    :showActions="false">
-                </sw-data-grid>
+                <salty-performance-analysis-grid
+                    :values="serverConfigurationInformation">
+                </salty-performance-analysis-grid>
             </sw-card>
 
         </sw-card-view>

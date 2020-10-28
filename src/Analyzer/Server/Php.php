@@ -10,17 +10,20 @@ use salty\Sw6PerformanceAnalysis\Struct\ResultCollection;
 class Php extends Analyzer
 {
     private const REQUIREMENTS = [
-        'php_memory_limit' => [
+        'phpMemoryLimit' => [
             'minValue'       => 512,
             'suggestedValue' => 768,
         ],
-        'php_max_execution_time' => [
+        'phpMaxExecutionTime' => [
             'minValue'       => 30,
             'suggestedValue' => 30,
         ],
-        'php_version' => [
+        'phpVersion' => [
             'minValue'       => '7.2.0',
             'suggestedValue' => '7.4.0',
+            'invalidValues'  => [
+                '7.2.20', '7.3.7',
+            ],
         ],
     ];
 
@@ -37,20 +40,20 @@ class Php extends Analyzer
     {
         $version = explode('-', PHP_VERSION)[0];
 
-        $this->getResult($collection, 'php_version', $version, self::REQUIREMENTS, 'v+');
+        $this->getResult($collection, 'phpVersion', $version, self::REQUIREMENTS, 'v+');
     }
 
     private function checkMemoryLimit(ResultCollection $collection): void
     {
         $memoryLimit = $this->convertToBytes(@ini_get('memory_limit')) / 1024 / 1024;
 
-        $this->getResult($collection, 'php_memory_limit', $memoryLimit, self::REQUIREMENTS);
+        $this->getResult($collection, 'phpMemoryLimit', $memoryLimit, self::REQUIREMENTS);
     }
 
     private function checkMaxExecutionTime(ResultCollection $collection): void
     {
         $maxExecutionTime = (int) @ini_get('max_execution_time');
-        $this->getResult($collection, 'php_max_execution_time', $maxExecutionTime, self::REQUIREMENTS);
+        $this->getResult($collection, 'phpMaxExecutionTime', $maxExecutionTime, self::REQUIREMENTS);
     }
 
     /**

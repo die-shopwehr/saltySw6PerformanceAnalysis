@@ -4,11 +4,11 @@ import enGB from './snippet/en-GB.json';
 
 Shopware.Module.register('salty-performance-analysis', {
     type: 'plugin',
-    name: 'Performance Analysis',
-    title: 'Custom module',
-    description: 'Description for your custom module',
+    name: 'PerformanceAnalysis',
+    title: 'saltyPerformanceAnalysis.title',
+    description: '',
     color: '#62ff80',
-    icon: 'default-object-lab-flask',
+    icon: 'default-web-bug',
 
     snippets: {
         'de-DE': deDE,
@@ -23,9 +23,9 @@ Shopware.Module.register('salty-performance-analysis', {
     },
 
     navigation: [{
-        label: 'Custom Module',
+        label: 'saltyPerformanceAnalysis.title',
         color: '#62ff80',
         path: 'salty.performance.analysis.overview',
-        icon: 'default-object-lab-flask'
+        icon: 'default-web-bug'
     }]
 });

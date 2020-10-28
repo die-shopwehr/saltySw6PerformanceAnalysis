@@ -14,7 +14,7 @@ class Cache extends Analyzer
             'minValue'       => 1,
             'suggestedValue' => 1,
         ],
-        'apcu_memory' => [
+        'apcuMemory' => [
             'minValue'       => 128,
             'suggestedValue' => 128,
         ],
@@ -22,7 +22,7 @@ class Cache extends Analyzer
             'minValue'       => 1,
             'suggestedValue' => 1,
         ],
-        'opcache_memory' => [
+        'opcacheMemory' => [
             'minValue'       => 256,
             'suggestedValue' => 256,
         ],
@@ -45,13 +45,13 @@ class Cache extends Analyzer
             return;
         }
 
-        $this->getResult($collection, 'apcu_memory', APC_ITER_MEM_SIZE, self::REQUIREMENTS);
+        $this->getResult($collection, 'apcuMemory', APC_ITER_MEM_SIZE, self::REQUIREMENTS);
     }
 
     private function checkOpcacheEnabled(ResultCollection $collection): void
     {
         $isOpcacheEnabled = extension_loaded('Zend OPcache');
-        $this->getResult($collection, 'apcu', (int) $isOpcacheEnabled, self::REQUIREMENTS);
+        $this->getResult($collection, 'opcache', (int) $isOpcacheEnabled, self::REQUIREMENTS);
 
         if ($isOpcacheEnabled !== true) {
             return;
@@ -64,6 +64,6 @@ class Cache extends Analyzer
             return;
         }
 
-        $this->getResult($collection, 'opcache_memory', (int) $opcacheMemory, self::REQUIREMENTS);
+        $this->getResult($collection, 'opcacheMemory', (int) $opcacheMemory, self::REQUIREMENTS);
     }
 }
