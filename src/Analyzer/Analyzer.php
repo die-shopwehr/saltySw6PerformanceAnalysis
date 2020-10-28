@@ -17,7 +17,7 @@ abstract class Analyzer
     abstract public function analyze(ResultCollection $collection): ResultCollection;
 
     /**
-     * @param float|int|string $value
+     * @param bool|float|int|string $value
      */
     protected function getResult(
         ResultCollection $collection,
@@ -26,21 +26,7 @@ abstract class Analyzer
         array $requirements,
         string $operator = '>='
     ): void {
-        $status = self::STATUS_FAILED;
-
-        if ($operator === '>=') {
-            $value  = (int) $value;
-            $status = $this->valueIsGreaterThan($value, $requirements[$name]);
-        }
-
-        if ($operator === 'v+') {
-            $value  = (string) $value;
-            $status = $this->versionIsGreaterThan($value, $requirements[$name]);
-        }
-
-        if (array_key_exists('invalidValues', $requirements[$name]) && in_array($value, $requirements[$name]['invalidValues'], false)) {
-            $status = self::STATUS_FAILED;
-        }
+        $status = $this->compareValues($name, $value, $requirements, $operator);
 
         $data = [
             'name'   => $name,
@@ -54,7 +40,45 @@ abstract class Analyzer
         $collection->add($result);
     }
 
-    protected function valueIsGreaterThan(int $value, array $requirements): string
+    /**
+     * @param float|int|string $value
+     */
+    private function compareValues(
+        string $name,
+        &$value,
+        array $requirements,
+        string $operator = '>='
+    ): string {
+        $status = self::STATUS_FAILED;
+
+        if ($operator === '>=') {
+            $value  = (int) $value;
+            $status = $this->valueIsGreaterThan($value, $requirements[$name]);
+        }
+
+        if ($operator === 'v+') {
+            $value  = (string) $value;
+            $status = $this->versionIsGreaterThan($value, $requirements[$name]);
+        }
+
+        if ($operator === '=') {
+            $value  = (string) $value;
+            $status = $value === $requirements[$name]['expected'] ? self::STATUS_PASSED : self::STATUS_FAILED;
+        }
+
+        if ($operator === '!=') {
+            $value  = (string) $value;
+            $status = $value !== $requirements[$name]['isNot'] ? self::STATUS_PASSED : self::STATUS_FAILED;
+        }
+
+        if (array_key_exists('invalidValues', $requirements[$name]) && in_array($value, $requirements[$name]['invalidValues'], false)) {
+            $status = self::STATUS_FAILED;
+        }
+
+        return $status;
+    }
+
+    private function valueIsGreaterThan(int $value, array $requirements): string
     {
         if ($value >= $requirements['suggestedValue']) {
             return self::STATUS_PASSED;
@@ -67,7 +91,7 @@ abstract class Analyzer
         return self::STATUS_PASSED_WITH_WARNING;
     }
 
-    protected function versionIsGreaterThan(string $value, array $requirements): string
+    private function versionIsGreaterThan(string $value, array $requirements): string
     {
         if (version_compare($value, $requirements['suggestedValue'], '>=')) {
             return self::STATUS_PASSED;

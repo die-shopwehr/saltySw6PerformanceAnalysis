@@ -44,32 +44,36 @@ Component.register('salty-performance-analysis-grid', {
                    property: 'status',
                    label: 'saltyPerformanceAnalysis.columns.status',
                    rawData: true,
-                   align: 'center'
+                   align: 'center',
+                   width: '80px',
                },
                {
                    property: 'name',
                    label: 'saltyPerformanceAnalysis.columns.name',
-                   rawData: true
+                   rawData: true,
+                   primary: true,
                },
                {
                    property: 'suggestedValue',
                    label: 'saltyPerformanceAnalysis.columns.recommended',
                    rawData: true,
-                   align: 'center'
+                   align: 'center',
+                   width: '135px',
                },
                {
                    property: 'value',
                    label: 'saltyPerformanceAnalysis.columns.value',
                    rawData: true,
-                   align: 'center'
+                   align: 'center',
+                   width: '75px',
                },
                {
                    property: 'information',
                    label: 'saltyPerformanceAnalysis.columns.information',
                    rawData: true,
-                   align: 'center'
-               },
-
+                   align: 'center',
+                   width: '120px',
+               }
            ]
         },
 

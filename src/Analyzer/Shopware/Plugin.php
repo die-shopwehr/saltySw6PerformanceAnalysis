@@ -10,6 +10,9 @@ use salty\Sw6PerformanceAnalysis\Struct\ResultCollection;
 
 class Plugin extends Analyzer
 {
+    /** @var Connection */
+    private $connection;
+
     public function analyze(ResultCollection $collection): ResultCollection
     {
         $result = new Result();

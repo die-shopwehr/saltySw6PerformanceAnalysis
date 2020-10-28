@@ -7,18 +7,24 @@
             "name": "Name",
             "recommended": "Recommended",
             "value": "Value",
-            "information": "Information"
+            "information": "Information",
+            "externalStorage": "External Storage/CDN"
         },
+        "remarks": {
+            "serverProtocol": "*Due to technical limitations the server protocol version cannot be determined accurately"        },
         "name": {
             "phpVersion": "PHP Version",
-            "serverProtocol": "HTTP protocol version*<br/>*Due to technical limitations the server protocol version cannot be determined accurately",
+            "serverProtocol": "HTTP protocol version*",
             "phpMemoryLimit": "PHP memory limit in Mb",
             "phpMaxExecutionTime": "PHP - max execution time",
             "apcu": "APCu object cache",
             "apcuMemory": "APCu - available Memory",
             "opcache": "Zend OpCache",
-            "opcacheMemory": "OpCache - available Memory"
-
+            "opcacheMemory": "OpCache - available Memory",
+            "kernelEnvironment": "Kernel mode",
+            "externalStorage": "External Storage/CDN",
+            "elasticSearch": "ElasticSearch",
+            "httpCache": "Http-Cache"
         },
         "information": {
             "phpVersion": "https://www.php.net/supported-versions.php",
@@ -28,7 +34,11 @@
             "apcu": "https://developers.shopware.com/sysadmins-guide/shopware-5-performance-for-sysadmins/#user-data-cache-apcu",
             "apcuMemory": "https://www.php.net/manual/en/apcu.configuration.php",
             "opcache": "https://developers.shopware.com/sysadmins-guide/shopware-5-performance-for-sysadmins/#opcode-cache",
-            "opcacheMemory": "https://www.php.net/manual/en/opcache.configuration.php"
+            "opcacheMemory": "https://www.php.net/manual/en/opcache.configuration.php",
+            "kernelEnvironment": "https://docs.shopware.com/en/en/shopware-6-en/tutorials-and-faq/debugging",
+            "externalStorage": "https://docs.shopware.com/en/shopware-platform-dev-en/how-to/use-s3-datastorage",
+            "elasticSearch": "https://docs.shopware.com/en/shopware-platform-dev-en/how-to/using-elasticsearch",
+            "httpCache": "https://docs.shopware.com/en/shopware-6-en/configuration/caches-indexes"
         }
     }
 }

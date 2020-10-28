@@ -26,6 +26,10 @@ class Cache extends Analyzer
             'minValue'       => 256,
             'suggestedValue' => 256,
         ],
+        'httpCache' => [
+            'minValue'       => 1,
+            'suggestedValue' => 1,
+        ],
     ];
 
     public function analyze(ResultCollection $collection): ResultCollection
