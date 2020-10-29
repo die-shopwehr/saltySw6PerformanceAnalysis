@@ -15,7 +15,7 @@
         <span v-html="$tc(getSnippetName(item.name, 'name'))"></span>
     </template>
     <template slot="column-information" slot-scope="{ item }">
-        <a v-bind:href="$tc(getSnippetName(item.name, 'information'))" target="_blank">
+        <a v-bind:href="$tc(getSnippetName(item.name, 'information'))" rel="noopener" target="_blank">
             {{ $tc('saltyPerformanceAnalysis.info') }}
         </a>
     </template>
