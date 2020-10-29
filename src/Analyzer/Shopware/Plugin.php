@@ -5,23 +5,39 @@ declare(strict_types=1);
 namespace salty\Sw6PerformanceAnalysis\Analyzer\Shopware;
 
 use salty\Sw6PerformanceAnalysis\Analyzer\Analyzer;
-use salty\Sw6PerformanceAnalysis\Struct\Result;
 use salty\Sw6PerformanceAnalysis\Struct\ResultCollection;
+use Shopware\Core\Framework\Context;
+use Shopware\Core\Framework\DataAbstractionLayer\EntityRepositoryInterface;
+use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 
 class Plugin extends Analyzer
 {
-    /** @var Connection */
-    private $connection;
+    private const REQUIREMENTS = [
+        'pluginsInstalled' => [
+            'maxValue'       => 15,
+            'suggestedValue' => 10,
+        ],
+    ];
+
+    /** @var EntityRepositoryInterface */
+    private $pluginRepository;
+
+    public function __construct(EntityRepositoryInterface $pluginRepository)
+    {
+        $this->pluginRepository = $pluginRepository;
+    }
 
     public function analyze(ResultCollection $collection): ResultCollection
     {
-        $result = new Result();
-        $result->setStatus(self::STATUS_PASSED_WITH_WARNING);
-        $collection->add($result);
-        $result = new Result();
-        $result->setStatus(self::STATUS_INFO);
-        $collection->add($result);
+        $this->checkPluginsInstalled($collection);
 
         return $collection;
+    }
+
+    private function checkPluginsInstalled(ResultCollection $collection): void
+    {
+        $quantity = $this->pluginRepository->searchIds(new Criteria(), Context::createDefaultContext())->getTotal();
+
+        $this->getResult($collection, 'pluginsInstalled', $quantity, self::REQUIREMENTS);
     }
 }

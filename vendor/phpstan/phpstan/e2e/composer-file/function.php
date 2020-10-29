@@ -1,6 +1,0 @@
-<?php
-
-function myCustomFunction(): void
-{
-
-}

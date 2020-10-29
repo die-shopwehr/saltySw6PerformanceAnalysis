@@ -1,8 +1,14 @@
 {
     "name": "salty/sw6-performance-analysis",
-    "description": "Skeleton plugin",
+    "description": "Performance Analysis",
+    "version": "v0.9",
     "type": "shopware-platform-plugin",
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Die Shopwehr"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "salty\\Sw6PerformanceAnalysis\\": "src/"
@@ -19,8 +25,20 @@
     "extra": {
         "shopware-plugin-class": "salty\\Sw6PerformanceAnalysis\\saltySw6PerformanceAnalysis",
         "label": {
-            "de-DE": "Skeleton plugin",
-            "en-GB": "Skeleton plugin"
+            "de-DE": "Shopware Performance Analyse",
+            "en-GB": "Shopware Performance Analysis"
+        },
+        "description": {
+            "de-DE": "Diese Erweiterung analysiert Ihre Shopware- & Serverkonfiguration, um auf dieser Grundlage Empfehlungen und Informationen für die Optimierung der Shop-Performance bereitzustellen.",
+            "en-GB": "This extension is analysing your Shopware and server configuration for giving recommendations and information to optimize the general shop performance."
+        },
+        "manufacturerLink": {
+            "de-DE": "https://shopwehr.de",
+            "en-GB": "https://shopwehr.de"
+        },
+        "supportLink": {
+            "de-DE": "https://shopwehr.de",
+            "en-GB": "https://shopwehr.de"
         }
     },
     "scripts": {

@@ -19,7 +19,7 @@ class Php extends Analyzer
             'suggestedValue' => 30,
         ],
         'phpVersion' => [
-            'minValue'       => '7.2.0',
+            'minVersion'     => '7.2.0',
             'suggestedValue' => '7.4.0',
             'invalidValues'  => [
                 '7.2.20', '7.3.7',
@@ -40,7 +40,7 @@ class Php extends Analyzer
     {
         $version = explode('-', PHP_VERSION)[0];
 
-        $this->getResult($collection, 'phpVersion', $version, self::REQUIREMENTS, 'v+');
+        $this->getResult($collection, 'phpVersion', $version, self::REQUIREMENTS);
     }
 
     private function checkMemoryLimit(ResultCollection $collection): void

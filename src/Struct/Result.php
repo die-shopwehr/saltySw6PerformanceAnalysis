@@ -15,16 +15,10 @@ class Result extends Struct
     protected $value;
 
     /** @var string */
-    protected $minValue;
-
-    /** @var string */
     protected $suggestedValue;
 
-    /** @var string */
+    /** @var Status */
     protected $status;
-
-    /** @var array */
-    protected $invalidValues = [];
 
     public function getName(): string
     {
@@ -46,16 +40,6 @@ class Result extends Struct
         $this->value = $value;
     }
 
-    public function getMinValue(): string
-    {
-        return $this->minValue;
-    }
-
-    public function setMinValue(string $minValue): void
-    {
-        $this->minValue = $minValue;
-    }
-
     public function getSuggestedValue(): string
     {
         return $this->suggestedValue;
@@ -66,23 +50,13 @@ class Result extends Struct
         $this->suggestedValue = $suggestedValue;
     }
 
-    public function getStatus(): string
+    public function getStatus(): Status
     {
         return $this->status;
     }
 
-    public function setStatus(string $status): void
+    public function setStatus(Status $status): void
     {
         $this->status = $status;
-    }
-
-    public function getInvalidValues(): array
-    {
-        return $this->invalidValues;
-    }
-
-    public function setInvalidValues(array $invalidValues): void
-    {
-        $this->invalidValues = $invalidValues;
     }
 }

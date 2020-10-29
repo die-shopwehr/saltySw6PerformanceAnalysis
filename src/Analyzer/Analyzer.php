@@ -6,14 +6,10 @@ namespace salty\Sw6PerformanceAnalysis\Analyzer;
 
 use salty\Sw6PerformanceAnalysis\Struct\Result;
 use salty\Sw6PerformanceAnalysis\Struct\ResultCollection;
+use salty\Sw6PerformanceAnalysis\Struct\Status;
 
 abstract class Analyzer
 {
-    public const STATUS_PASSED              = 'success';
-    public const STATUS_PASSED_WITH_WARNING = 'warning';
-    public const STATUS_FAILED              = 'error';
-    public const STATUS_INFO                = 'info';
-
     abstract public function analyze(ResultCollection $collection): ResultCollection;
 
     /**
@@ -23,10 +19,9 @@ abstract class Analyzer
         ResultCollection $collection,
         string $name,
         $value,
-        array $requirements,
-        string $operator = '>='
+        array $requirements
     ): void {
-        $status = $this->compareValues($name, $value, $requirements, $operator);
+        $status = $this->compareValues($name, $value, $requirements);
 
         $data = [
             'name'   => $name,
@@ -41,66 +36,89 @@ abstract class Analyzer
     }
 
     /**
-     * @param float|int|string $value
+     * @param int|string $value
      */
     private function compareValues(
         string $name,
         &$value,
-        array $requirements,
-        string $operator = '>='
-    ): string {
-        $status = self::STATUS_FAILED;
+        array $requirements
+    ): Status {
+        $type = Status::STATUS_INFO;
 
-        if ($operator === '>=') {
-            $value  = (int) $value;
-            $status = $this->valueIsGreaterThan($value, $requirements[$name]);
+        //determine type of value
+        if (is_string($requirements[$name]['suggestedValue'])) {
+            $value = (string) $value;
         }
 
-        if ($operator === 'v+') {
-            $value  = (string) $value;
-            $status = $this->versionIsGreaterThan($value, $requirements[$name]);
+        if (is_int($requirements[$name]['suggestedValue'])) {
+            $value = (int) $value;
         }
 
-        if ($operator === '=') {
-            $value  = (string) $value;
-            $status = $value === $requirements[$name]['expected'] ? self::STATUS_PASSED : self::STATUS_FAILED;
+        //compare values
+        if (array_key_exists('minVersion', $requirements[$name])) {
+            $type = $this->checkVersionIsGreaterThan((string) $value, $requirements[$name]);
         }
 
-        if ($operator === '!=') {
-            $value  = (string) $value;
-            $status = $value !== $requirements[$name]['isNot'] ? self::STATUS_PASSED : self::STATUS_FAILED;
+        if (array_key_exists('maxValue', $requirements[$name])) {
+            $type = $this->checkValueIsLessOrEqual((int) $value, $requirements[$name]);
         }
 
+        if (array_key_exists('minValue', $requirements[$name])) {
+            $type = $this->checkValueIsGreaterOrEqual((int) $value, $requirements[$name]);
+        }
+
+        if (array_key_exists('expected', $requirements[$name])) {
+            $type = $value === $requirements[$name]['expected'] ? Status::STATUS_PASSED : Status::STATUS_FAILED;
+        }
+
+        if (array_key_exists('isNot', $requirements[$name])) {
+            $type = $value !== $requirements[$name]['isNot'] ? Status::STATUS_PASSED : Status::STATUS_FAILED;
+        }
+
+        //check invalid values afterwards
         if (array_key_exists('invalidValues', $requirements[$name]) && in_array($value, $requirements[$name]['invalidValues'], false)) {
-            $status = self::STATUS_FAILED;
+            return new Status(Status::STATUS_FAILED);
         }
 
-        return $status;
+        return new Status($type);
     }
 
-    private function valueIsGreaterThan(int $value, array $requirements): string
+    private function checkValueIsGreaterOrEqual(int $value, array $requirements): string
     {
         if ($value >= $requirements['suggestedValue']) {
-            return self::STATUS_PASSED;
+            return Status::STATUS_PASSED;
         }
 
         if ($value < $requirements['minValue']) {
-            return self::STATUS_FAILED;
+            return Status::STATUS_FAILED;
         }
 
-        return self::STATUS_PASSED_WITH_WARNING;
+        return Status::STATUS_PASSED_WITH_WARNING;
     }
 
-    private function versionIsGreaterThan(string $value, array $requirements): string
+    private function checkValueIsLessOrEqual(int $value, array $requirements): string
+    {
+        if ($value <= $requirements['suggestedValue']) {
+            return Status::STATUS_PASSED;
+        }
+
+        if ($value > $requirements['maxValue']) {
+            return Status::STATUS_FAILED;
+        }
+
+        return Status::STATUS_PASSED_WITH_WARNING;
+    }
+
+    private function checkVersionIsGreaterThan(string $value, array $requirements): string
     {
         if (version_compare($value, $requirements['suggestedValue'], '>=')) {
-            return self::STATUS_PASSED;
+            return Status::STATUS_PASSED;
         }
 
-        if (version_compare($value, $requirements['minValue'], '<')) {
-            return self::STATUS_FAILED;
+        if (version_compare($value, $requirements['minVersion'], '<')) {
+            return Status::STATUS_FAILED;
         }
 
-        return self::STATUS_PASSED_WITH_WARNING;
+        return Status::STATUS_PASSED_WITH_WARNING;
     }
 }

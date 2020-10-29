@@ -6,6 +6,7 @@ namespace salty\Sw6PerformanceAnalysis\Analyzer\Server;
 
 use salty\Sw6PerformanceAnalysis\Analyzer\Analyzer;
 use salty\Sw6PerformanceAnalysis\Struct\ResultCollection;
+use Throwable;
 
 class Cache extends Analyzer
 {
@@ -45,7 +46,7 @@ class Cache extends Analyzer
         $isApcuEnabled = extension_loaded('apcu');
         $this->getResult($collection, 'apcu', (int) $isApcuEnabled, self::REQUIREMENTS);
 
-        if ($isApcuEnabled !== true) {
+        if ($isApcuEnabled !== true || defined('APC_ITER_MEM_SIZE') === false) {
             return;
         }
 
@@ -54,7 +55,7 @@ class Cache extends Analyzer
 
     private function checkOpcacheEnabled(ResultCollection $collection): void
     {
-        $isOpcacheEnabled = extension_loaded('Zend OPcache');
+        $isOpcacheEnabled = extension_loaded('Zend OPcache') && ini_get('opcache.enable');
         $this->getResult($collection, 'opcache', (int) $isOpcacheEnabled, self::REQUIREMENTS);
 
         if ($isOpcacheEnabled !== true) {
@@ -64,7 +65,7 @@ class Cache extends Analyzer
         try {
             $opcacheConfiguration = opcache_get_configuration();
             $opcacheMemory        = $opcacheConfiguration['directives']['opcache.memory_consumption'] / 1024 / 1024;
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return;
         }
 

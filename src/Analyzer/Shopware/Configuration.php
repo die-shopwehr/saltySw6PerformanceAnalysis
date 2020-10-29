@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace salty\Sw6PerformanceAnalysis\Analyzer\Shopware;
 
+use League\Flysystem\Filesystem;
 use League\Flysystem\FilesystemInterface;
 use salty\Sw6PerformanceAnalysis\Analyzer\Analyzer;
 use salty\Sw6PerformanceAnalysis\Struct\ResultCollection;
+use Throwable;
 
 class Configuration extends Analyzer
 {
@@ -71,20 +73,26 @@ class Configuration extends Analyzer
 
     private function checkEnvironmentMode(ResultCollection $collection): void
     {
-        $this->getResult($collection, 'kernelEnvironment', $this->kernelEnvironment, self::REQUIREMENTS, '=');
+        $this->getResult($collection, 'kernelEnvironment', $this->kernelEnvironment, self::REQUIREMENTS);
     }
 
     private function checkFileSystem(ResultCollection $collection): void
     {
-        $adapter     = explode('\\', get_class($this->fileSystem->getAdapter()));
-        $adapterName = end($adapter);
+        try {
+            /** @var Filesystem $fileSystem */
+            $fileSystem  = $this->fileSystem;
+            $adapter     = explode('\\', get_class($fileSystem->getAdapter()));
+            $adapterName = end($adapter);
+        } catch (Throwable $e) {
+            return;
+        }
 
-        $this->getResult($collection, 'externalStorage', $adapterName, self::REQUIREMENTS, '!=');
+        $this->getResult($collection, 'externalStorage', $adapterName, self::REQUIREMENTS);
     }
 
     private function checkElasticSearch(ResultCollection $collection): void
     {
-        $this->getResult($collection, 'elasticSearch', $this->elasticSearchEnabled, self::REQUIREMENTS, '>=');
+        $this->getResult($collection, 'elasticSearch', $this->elasticSearchEnabled, self::REQUIREMENTS);
     }
 
     private function checkSessionHandler(ResultCollection $collection): void

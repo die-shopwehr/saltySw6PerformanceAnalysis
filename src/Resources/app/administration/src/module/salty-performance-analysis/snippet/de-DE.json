@@ -24,7 +24,9 @@
             "kernelEnvironment": "Kernel-Modus",
             "externalStorage": "External Storage/CDN",
             "elasticSearch": "ElasticSearch",
-            "httpCache": "Http-Cache"
+            "httpCache": "Http-Cache",
+            "scheduledTasks": "Länger nicht ausgeführte Scheduled Tasks",
+            "pluginsInstalled": "Plugins installiert (Max)"
         },
         "information": {
             "phpVersion": "https://www.php.net/supported-versions.php",
@@ -38,7 +40,9 @@
             "kernelEnvironment": "https://docs.shopware.com/de/shopware-6-de/tutorials-und-faq/fehlermeldungen-debuggen",
             "externalStorage": "https://docs.shopware.com/en/shopware-platform-dev-en/how-to/use-s3-datastorage",
             "elasticSearch": "https://docs.shopware.com/en/shopware-platform-dev-en/how-to/using-elasticsearch",
-            "httpCache": "https://docs.shopware.com/de/shopware-6-de/einstellungen/caches-indizes"
+            "httpCache": "https://docs.shopware.com/de/shopware-6-de/einstellungen/caches-indizes",
+            "scheduledTasks": "https://docs.shopware.com/en/shopware-platform-dev-en/references-internals/core/module/tasks",
+            "pluginsInstalled": "https://docs.shopware.com/de/shopware-6-de/einstellungen/plugins"
         }
     }
 }

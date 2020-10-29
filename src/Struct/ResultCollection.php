@@ -8,4 +8,8 @@ use Shopware\Core\Framework\Struct\Collection;
 
 class ResultCollection extends Collection
 {
+    protected function getExpectedClass(): ?string
+    {
+        return Result::class;
+    }
 }

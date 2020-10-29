@@ -40,11 +40,6 @@ class PerformanceAnalysis extends AbstractController
             $analyzer->analyze($result);
         }
 
-        /** TODO
-         * MySQL 5.7.21 oder höher
-        MariaDB 10.3 oder höher
-         */
-
         return new JsonResponse($result);
     }
 
@@ -58,21 +53,6 @@ class PerformanceAnalysis extends AbstractController
         foreach ($this->serverConfigAnalyzers as $analyzer) {
             $analyzer->analyze($result);
         }
-
-        /* TODO
-         * 7.2 oder höher (7.2.20 und 7.3.7 sind nicht kompatibel)
-memory_limit 512M oder höher
-max_execution_time 30 Sekunden oder höher
-         */
-
-        /** TODO
-         * MySQL 5.7.21 oder höher
-        MariaDB 10.3 oder höher
-         */
-
-        /** TODO
-        Webserver mit HTTP2 Unterstützung
-         */
 
         return new JsonResponse($result);
     }

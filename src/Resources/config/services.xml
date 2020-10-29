@@ -33,6 +33,13 @@
         </service>
 
         <service id="salty\Sw6PerformanceAnalysis\Analyzer\Shopware\Plugin">
+            <argument type="service" id="plugin.repository"/>
+
+            <tag name="salty_performance_analysis.shopware-config.analyzer"/>
+        </service>
+
+        <service id="salty\Sw6PerformanceAnalysis\Analyzer\Shopware\Queue">
+            <argument type="service" id="scheduled_task.repository"/>
             <tag name="salty_performance_analysis.shopware-config.analyzer"/>
         </service>
 

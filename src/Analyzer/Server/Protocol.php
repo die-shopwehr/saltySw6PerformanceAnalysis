@@ -11,7 +11,7 @@ class Protocol extends Analyzer
 {
     private const REQUIREMENTS = [
         'serverProtocol' => [
-            'minValue'       => '2',
+            'minVersion'     => '2',
             'suggestedValue' => '2',
         ],
     ];
@@ -26,7 +26,7 @@ class Protocol extends Analyzer
     private function checkProtocolVersion(ResultCollection $collection): void
     {
         $protocolVersion = $this->getProtocolVersion();
-        $this->getResult($collection, 'serverProtocol', $protocolVersion, self::REQUIREMENTS, 'v+');
+        $this->getResult($collection, 'serverProtocol', $protocolVersion, self::REQUIREMENTS);
     }
 
     private function getProtocolVersion(): string
@@ -36,8 +36,7 @@ class Protocol extends Analyzer
         preg_match_all('/\/(\d+)?.?(\d+)?.?/m', $_SERVER['SERVER_PROTOCOL'], $matches, PREG_SET_ORDER);
 
         unset($matches[0][0]);
-        $version = implode('.', $matches[0]);
 
-        return $version;
+        return implode('.', $matches[0]);
     }
 }
