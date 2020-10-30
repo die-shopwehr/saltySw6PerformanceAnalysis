@@ -23,9 +23,10 @@ Shopware.Module.register('salty-performance-analysis', {
     },
 
     navigation: [{
+        id: 'salty.performance.analysis',
         label: 'saltyPerformanceAnalysis.title',
         color: '#62ff80',
         path: 'salty.performance.analysis.overview',
-        icon: 'default-web-bug'
+        parent: 'sw-settings',
     }]
 });
