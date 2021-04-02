@@ -4,7 +4,7 @@ stages:
 
 variables:
     SHOPWARE_VERSION: "6.4.0.0-rc1"
-    VERSION_TAG: "v6.4.0.0-RC1"
+    VERSION_TAG: "6.4.0.0-RC1"
 
 phpstan:
     stage: quality
