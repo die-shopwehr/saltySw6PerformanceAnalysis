@@ -36,6 +36,7 @@ build:
         - cd /var/www/html && bin/build-administration.sh
         #- cd /var/www/html && bin/build-storefront.sh
         - rm /var/www/html/custom/plugins/${CI_PROJECT_NAME}/composer.lock
+        - rm /var/www/html/custom/plugins/${CI_PROJECT_NAME}/phpstan.neon
         - cd /var/www/html/custom/plugins/${CI_PROJECT_NAME} && zip -r ${CI_PROJECT_DIR}/${CI_PROJECT_NAME}.zip ./*
     artifacts:
         paths:
