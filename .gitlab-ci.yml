@@ -41,6 +41,6 @@ build:
         - ls -la ${CI_PROJECT_DIR}
     artifacts:
         paths:
-            - $CI_PROJECT_DIR
+            - $CI_PROJECT_DIR/
         name: "saltySw6PerformanceAnalysis"
 
