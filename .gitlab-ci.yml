@@ -9,6 +9,8 @@ variables:
 phpstan:
     stage: quality
     image: "edbizarro/gitlab-ci-pipeline-php:7.4"
+    before_script:
+        - composer self-update
     script:
         - git clone -b v${VERSION_TAG} --depth 1 https://github.com/shopware/development "/tmp/shopware"
         - cp -r ${CI_PROJECT_DIR} /tmp/shopware/custom/plugins/${CI_PROJECT_NAME}
