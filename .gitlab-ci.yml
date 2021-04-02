@@ -39,5 +39,5 @@ build:
     artifacts:
         paths:
             - $CI_PROJECT_NAME.zip
-        name: "Release"
+        name: "saltySw6PerformanceAnalysis"
 
