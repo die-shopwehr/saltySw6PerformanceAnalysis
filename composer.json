@@ -1,7 +1,7 @@
 {
     "name": "salty/sw6-performance-analysis",
     "description": "Performance Analysis",
-    "version": "v0.9.0",
+    "version": "v0.10.0",
     "type": "shopware-platform-plugin",
     "license": "MIT",
     "authors": [

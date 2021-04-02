@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @RouteScope(scopes={"api"})
- * @Route(path="/api/{version}/_action/salty-performance-analysis")
+ * @Route(path="/api/_action/salty-performance-analysis")
  */
 class PerformanceAnalysis extends AbstractController
 {

@@ -8,6 +8,10 @@
         <service id="salty\Sw6PerformanceAnalysis\Controller\PerformanceAnalysis" public="true">
             <argument type="tagged_iterator" tag="salty_performance_analysis.server-config.analyzer"/>
             <argument type="tagged_iterator" tag="salty_performance_analysis.shopware-config.analyzer"/>
+
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
         </service>
 
         <!-- Analyzer -->

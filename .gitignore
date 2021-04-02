@@ -1,6 +1,6 @@
+.idea
 .php_cs.cache
-vendor
-node_modules
-package-lock.json
-.phpunit.result.cache
-phpmd_result.xml
+coverage/
+vendor/
+src/Resources/app/storefront/dist/
+src/Resources/public/administration/js/

@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'salty\\Sw6PerformanceAnalysis\\' => array($baseDir . '/src'),
+    'K10r\\Codestyle\\' => array($vendorDir . '/k10r/codestyle/src'),
 );
