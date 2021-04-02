@@ -3,7 +3,7 @@ stages:
     - build
 
 variables:
-    SHOPWARE_VERSION: "6.3.4.0"
+    SHOPWARE_VERSION: "6.4.0.0-rc1"
 
 phpstan:
     stage: quality
