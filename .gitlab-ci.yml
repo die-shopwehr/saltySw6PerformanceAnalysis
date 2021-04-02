@@ -35,6 +35,7 @@ build:
         - cd /var/www/html && php bin/console plugin:refresh -nq && php bin/console plugin:install --activate -c ${CI_PROJECT_NAME} -nq
         - cd /var/www/html && bin/build-administration.sh
         #- cd /var/www/html && bin/build-storefront.sh
+        - rm /var/www/html/custom/plugins/${CI_PROJECT_NAME}/composer.lock
         - cd /var/www/html/custom/plugins/${CI_PROJECT_NAME} && zip -r ${CI_PROJECT_DIR}/${CI_PROJECT_NAME}.zip ./*
     artifacts:
         paths:
