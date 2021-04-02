@@ -4,12 +4,13 @@ stages:
 
 variables:
     SHOPWARE_VERSION: "6.4.0.0-rc1"
+    VERSION_TAG: "v6.4.0.0-RC1"
 
 phpstan:
     stage: quality
     image: "edbizarro/gitlab-ci-pipeline-php:7.4"
     script:
-        - git clone -b v${SHOPWARE_VERSION} --depth 1 https://github.com/shopware/development "/tmp/shopware"
+        - git clone -b v${VERSION_TAG} --depth 1 https://github.com/shopware/development "/tmp/shopware"
         - cp -r ${CI_PROJECT_DIR} /tmp/shopware/custom/plugins/${CI_PROJECT_NAME}
         - cd /tmp/shopware/custom/plugins/${CI_PROJECT_NAME} && composer install --prefer-dist --no-ansi --no-interaction --no-progress --optimize-autoloader
         - cd /tmp/shopware && composer install --no-interaction --optimize-autoloader --no-suggest --no-scripts
