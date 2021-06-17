@@ -64,6 +64,11 @@ class Cache extends Analyzer
 
         try {
             $opcacheConfiguration = opcache_get_configuration();
+
+            if($opcacheConfiguration === false) {
+                return;
+            }
+
             $opcacheMemory        = $opcacheConfiguration['directives']['opcache.memory_consumption'] / 1024 / 1024;
         } catch (Throwable $e) {
             return;
