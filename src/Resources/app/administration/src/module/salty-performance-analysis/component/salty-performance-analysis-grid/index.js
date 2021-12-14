@@ -1,5 +1,5 @@
 import template from './salty-performance-analysis-grid.html.twig';
-import { Component, Mixin } from 'src/core/shopware';
+const { Component, Mixin } = Shopware;
 
 Component.register('salty-performance-analysis-grid', {
     template,
